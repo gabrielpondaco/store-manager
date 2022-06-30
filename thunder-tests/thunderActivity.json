@@ -8,12 +8,12 @@
     "method": "POST",
     "sortNum": 0,
     "created": "2022-06-29T19:08:51.291Z",
-    "modified": "2022-06-30T20:16:24.282Z",
+    "modified": "2022-06-30T21:42:23.198Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n    \"name\": \"Xablau\"\n}",
+      "raw": "{\n    \"name\": \"x\"\n}",
       "form": []
     },
     "tests": []

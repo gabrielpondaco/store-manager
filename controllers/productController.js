@@ -16,9 +16,14 @@ const productController = {
     }
   },
 
-  async add(req, res) {
-    const item = await productService.add(req.body.name);
-    return res.status(201).json(item);
+  async add(req, res, next) {
+    try {
+      const { name } = await productService.validateBodyAdd(req.body);
+      const item = await productService.add(name);  
+      return res.status(201).json(item);
+    } catch (error) {
+      next(error);
+    }
   },
 };
 
