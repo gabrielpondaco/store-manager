@@ -7,12 +7,12 @@ const productController = {
     return res.status(200).json(items);
   },
 
-  async getById(req, res) {
+  async getById(req, res, next) {
     try {
       const item = await productService.getById(req.params.id);
       return res.status(200).json(item);
     } catch (error) {
-      return res.status(404).json({ message: error.message });
+      next(error);
     }
   },
 
