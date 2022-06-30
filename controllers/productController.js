@@ -4,15 +4,15 @@ const productController = {
   /** @type {import('express').RequestHandler} */
   async getAll(req, res) {
     const items = await productService.getAll();
-    res.status(200).json(items);
+    return res.status(200).json(items);
   },
 
   async getById(req, res) {
     try {
       const item = await productService.getById(req.params.id);
-      res.status(200).json(item);
+      return res.status(200).json(item);
     } catch (error) {
-      res.status(404).json({ message: error.message });
+      return res.status(404).json({ message: error.message });
     }
   },
 };
