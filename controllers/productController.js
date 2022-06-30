@@ -15,6 +15,11 @@ const productController = {
       return res.status(404).json({ message: error.message });
     }
   },
+
+  async add(req, res) {
+    const item = await productService.add(req.body.name);
+    return res.status(201).json(item);
+  },
 };
 
 module.exports = productController;
