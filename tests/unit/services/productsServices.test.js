@@ -31,12 +31,23 @@ describe("services/seriesService", () => {
 
     it("deve disparar um erro quanto produto não for encontrado", () => {
       sinon.stub(productModel, "getById").resolves(false);
-      chai.expect(productService.getById('a')).to.eventually.throw(Error);
-    })
+      chai.expect(productService.getById("a")).to.eventually.throw(Error);
+    });
 
     it("deve retornar o objeto caso o productModel.getById retorne", () => {
       sinon.stub(productModel, "getById").resolves({});
       chai.expect(productService.getById(1)).to.eventually.deep.equal({});
+    });
+  });
+  describe("add", () => {
+    it("deve disparar um erro caso productModel.add dispare um erro", () => {
+      sinon.stub(productModel, "add").rejects();
+      chai.expect(productService.add("Coquinha")).to.eventually.be.rejected;
+    });
+
+    it("deve retornar o objeto caso o productModel.add retorne", () => {
+      sinon.stub(productModel, "add").resolves({});
+      chai.expect(productService.add("Coquinha")).to.eventually.deep.equal({});
     });
   });
 });

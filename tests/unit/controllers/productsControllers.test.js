@@ -45,4 +45,32 @@ describe('controllers/productController', () => {
       chai.expect(res.json.getCall(0).args[0]).to.be.deep.equal({});
     });
   });
+  describe("add", () => {
+    it("deve disparar um erro caso productService.validateBodyAdd dispare um erro", () => {
+      sinon.stub(productService, "validateBodyAdd").rejects();
+      chai.expect(productController.add({}, {})).to.eventually.be.rejected;
+    });
+    it("deve disparar um erro caso productController.add dispare um erro", () => {
+      sinon.stub(productService, "validateBodyAdd").resolves({});
+      sinon.stub(productService, "add").rejects();
+      chai.expect(productController.add({}, {})).to.eventually.be.rejected;
+    });
+
+    it("deve retornar o objeto caso o productController.add retorne", async () => {
+      const item = {
+        name: "coquinha",
+        id: 1,
+      };
+       const res = {
+         status: sinon.stub().callsFake(() => res),
+         json: sinon.stub().returns(),
+       };
+      const next = sinon.stub().returns();
+       sinon.stub(productService, "validateBodyAdd").resolves({name: "coquinha"});
+       sinon.stub(productService, "add").resolves(item);
+       await productController.add({}, res, next);
+      chai.expect(res.status.getCall(0).args[0]).to.equal(201);
+      chai.expect(res.json.getCall(0).args[0]).to.deep.equal(item);
+    });
+  });
 })

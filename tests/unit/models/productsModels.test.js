@@ -39,4 +39,25 @@ describe('models/productModel', () => {
       chai.expect(productsModel.getById(1)).to.eventually.deep.equal({});
     });
   })
+  describe("add", () => {
+    beforeEach(sinon.restore);
+    it("deve disparar um erro caso db.query dispare um erro", () => {
+      sinon.stub(db, "query").rejects();
+      chai.expect(productsModel.add(1)).to.eventually.be.rejected;
+    });
+    it("deve retornar nada caso db.query retorne lista vazia", () => {
+      sinon.stub(db, "query").resolves([[]]);
+      chai.expect(productsModel.add(1)).to.eventually.be.undefined;
+    });
+    it("deve retornar um elemento caso db.query retorne com sucesso", () => {
+      const item = {
+        name: "coquinha",
+        id: 1,
+      };
+      sinon.stub(db, "query").resolves(item);
+      chai
+        .expect(productsModel.add({ name: 'coquinha' }))
+        .to.eventually.deep.equal(item);
+    });
+  });
 })
