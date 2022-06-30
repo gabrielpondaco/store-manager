@@ -6,6 +6,11 @@ const productModel = {
     const [items] = await db.query(sql);
     return items;
   },
+  async getById(id) {
+    const sql = 'SELECT * FROM products WHERE id = ?';
+    const [[item]] = await db.query(sql, [id]);
+    return item;
+  },
 };
 
 module.exports = productModel;
