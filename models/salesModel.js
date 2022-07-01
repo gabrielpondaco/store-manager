@@ -1,9 +1,19 @@
 const db = require('./db');
 
-const saleModel = {
+const salesModel = {
+  async getAll() {
+    const sql = `
+    SELECT sale_id AS saleId, date, product_id AS productId, quantity FROM StoreManager.sales
+    INNER JOIN sales_products ON sales.id = sales_products.sale_id;`;
+    const [items] = await db.query(sql);
+    return items;
+  },
   async getById(id) {
-    const sql = 'SELECT * FROM sales WHERE id = ?';
-    const [[item]] = await db.query(sql, [id]);
+    const sql = `
+    SELECT date, product_id AS productId, quantity FROM StoreManager.sales
+    INNER JOIN sales_products ON sales.id = sales_products.sale_id
+    WHERE sale_id = ?;`;
+    const [item] = await db.query(sql, [id]);
     return item;
   },
   async add(sale) {
@@ -23,4 +33,4 @@ const saleModel = {
   },
 };
 
-module.exports = saleModel;
+module.exports = salesModel;
