@@ -44,6 +44,20 @@ const productController = {
       next(error);
     }
   },
+
+  async search(req, res, next) {
+    try {
+      const { q } = req.query;
+      if (!q) {
+        const item = await productService.getAll();
+        return res.status(200).json(item);
+      }
+      const item = await productService.search(q);
+      return res.status(200).json(item);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = productController;
