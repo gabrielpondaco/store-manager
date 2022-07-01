@@ -4,16 +4,16 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000",
-    "url": "http://localhost:3000/sales/3",
-    "method": "GET",
+    "url": "http://localhost:3000/products/999",
+    "method": "PUT",
     "sortNum": 0,
     "created": "2022-06-29T19:08:51.291Z",
-    "modified": "2022-07-01T14:46:52.723Z",
+    "modified": "2022-07-01T15:31:16.835Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "  [\n    {\n      \"productId\": 1,\n      \"quantity\":1\n    },\n    {\n      \"productId\": 2,\n      \"quantity\":5\n    }\n  ]",
+      "raw": "{\n    \"name\": \"xablau\"\n}",
       "form": []
     },
     "tests": []

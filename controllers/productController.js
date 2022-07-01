@@ -25,6 +25,16 @@ const productController = {
       next(error);
     }
   },
+
+  async updateProduct(req, res, next) {
+    try {
+      const { name } = await productService.validateBodyAdd(req.body);
+      const item = await productService.updateProduct(name, req.params.id);
+      return res.status(200).json(item);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = productController;
