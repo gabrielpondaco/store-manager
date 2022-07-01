@@ -26,11 +26,20 @@ const productController = {
     }
   },
 
-  async updateProduct(req, res, next) {
+  async update(req, res, next) {
     try {
       const { name } = await productService.validateBodyAdd(req.body);
-      const item = await productService.updateProduct(name, req.params.id);
+      const item = await productService.update(name, req.params.id);
       return res.status(200).json(item);
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  async delete(req, res, next) {
+    try {
+      await productService.delete(req.params.id);
+      return res.status(204).json();
     } catch (error) {
       next(error);
     }

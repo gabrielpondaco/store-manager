@@ -4,18 +4,13 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000",
-    "url": "http://localhost:3000/products/999",
-    "method": "PUT",
+    "url": "http://localhost:3000/products/1",
+    "method": "DELETE",
     "sortNum": 0,
     "created": "2022-06-29T19:08:51.291Z",
-    "modified": "2022-07-01T15:31:16.835Z",
+    "modified": "2022-07-01T15:44:28.268Z",
     "headers": [],
     "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n    \"name\": \"xablau\"\n}",
-      "form": []
-    },
     "tests": []
   }
 ]

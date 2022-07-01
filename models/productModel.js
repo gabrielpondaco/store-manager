@@ -11,7 +11,7 @@ const productModel = {
     const [[item]] = await db.query(sql, [id]);
     return item;
   },
-  async updateProduct(name, id) {
+  async update(name, id) {
     const sql = `
     UPDATE StoreManager.products
     SET name = ?
@@ -23,6 +23,12 @@ const productModel = {
     const sql = 'INSERT INTO products (name) VALUES (?)';
     const [{ insertId: id }] = await db.query(sql, [name]);
     return { name, id };
+  },
+  async delete(id) {
+    const sql = `
+    DELETE FROM products WHERE id = ?`;
+    await db.query(sql, [id]);
+    return true;
   },
 };
 

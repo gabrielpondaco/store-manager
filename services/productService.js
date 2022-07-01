@@ -3,9 +3,11 @@ const productModel = require('../models/productModel');
 const { runSchema } = require('./utils');
 
 const productService = {
-  validateBodyAdd: runSchema(Joi.object({
-    name: Joi.string().required().min(5),
-  })),
+  validateBodyAdd: runSchema(
+    Joi.object({
+      name: Joi.string().required().min(5),
+    }),
+  ),
 
   async getAll() {
     const items = await productModel.getAll();
@@ -22,14 +24,20 @@ const productService = {
     const item = await productModel.add(name);
     return item;
   },
-  async updateProduct(name, id) {
+  async update(name, id) {
     await this.getById(id);
-    await productModel.updateProduct(name, id);
+    await productModel.update(name, id);
     const updatedProduct = {
       id,
       name,
     };
     return updatedProduct;
+  },
+
+  async delete(id) {
+    await this.getById(id);
+    await productModel.delete(id);
+    return true;
   },
 };
 
