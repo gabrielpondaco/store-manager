@@ -13,7 +13,7 @@ const salesController = {
       const item = await salesService.getById(req.params.id);
       return res.status(200).json(item);
     } catch (error) {
-      next(error); 
+      next(error);
     }
   },
 
@@ -27,6 +27,14 @@ const salesController = {
       );
       const item = await salesService.add(req.body);
       return res.status(201).json(item);
+    } catch (error) {
+      next(error);
+    }
+  },
+  async delete(req, res, next) {
+    try {
+      await salesService.delete(req.params.id);
+      return res.status(204).json();
     } catch (error) {
       next(error);
     }
