@@ -10,7 +10,6 @@ const salesController = {
   async add(req, res, next) {
     try {
       await Promise.all(req.body.map((each) => salesService.validateBodyAdd(each)));
-      // const sales = await salesService.validateSales(req.body);
       await Promise.all(req.body
         .map((each) => salesService.getById(each.productId)));
       const item = await salesService.add(req.body);
