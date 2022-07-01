@@ -31,6 +31,20 @@ const salesController = {
       next(error);
     }
   },
+  async update(req, res, next) {
+    try {
+      await Promise.all(
+        req.body.map((each) => salesService.validateBodyAdd(each)),
+      );
+      await Promise.all(
+        req.body.map((each) => productService.getById(each.productId)),
+      );
+      const item = await salesService.update(req.body, req.params.id);
+      return res.status(200).json(item);
+    } catch (error) {
+      next(error);
+    }
+  },
   async delete(req, res, next) {
     try {
       await salesService.delete(req.params.id);

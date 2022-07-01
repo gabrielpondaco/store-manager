@@ -13,8 +13,7 @@ const salesModel = {
     const sql = `
     SELECT date, product_id AS productId, quantity FROM StoreManager.sales
     INNER JOIN sales_products ON sales.id = sales_products.sale_id
-    WHERE sale_id = ?
-    ORDER BY sales.id, sales_products.product_id;`;
+    WHERE sale_id = ?`;
     const [item] = await db.query(sql, [id]);
     return item;
   },
@@ -38,6 +37,15 @@ const salesModel = {
     DELETE FROM sales WHERE id = ?`;
     await db.query(sql, [id]);
     return true;
+  },
+  async update(sale, id) {
+    const { productId, quantity } = sale;
+    const sql = `
+    UPDATE sales_products
+    SET product_id = ?, quantity = ?
+    WHERE sale_id = ? AND product_id = ?;`;
+    const [item] = await db.query(sql, [productId, quantity, id, productId]);
+    return item;
   },
 };
 
