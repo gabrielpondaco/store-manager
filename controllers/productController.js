@@ -6,7 +6,6 @@ const productController = {
     const items = await productService.getAll();
     return res.status(200).json(items);
   },
-
   async getById(req, res, next) {
     try {
       const item = await productService.getById(req.params.id);
@@ -15,7 +14,6 @@ const productController = {
       next(error);
     }
   },
-
   async add(req, res, next) {
     try {
       const { name } = await productService.validateBodyAdd(req.body);
@@ -25,7 +23,6 @@ const productController = {
       next(error);
     }
   },
-
   async update(req, res, next) {
     try {
       const { name } = await productService.validateBodyAdd(req.body);
@@ -35,7 +32,6 @@ const productController = {
       next(error);
     }
   },
-
   async delete(req, res, next) {
     try {
       await productService.delete(req.params.id);
@@ -44,7 +40,6 @@ const productController = {
       next(error);
     }
   },
-
   async search(req, res, next) {
     try {
       const { q } = req.query;

@@ -20,7 +20,6 @@ const salesService = {
     const items = await salesModel.getAll();
     return items;
   },
-
   async add(sales) {
     const salesId = await salesModel.addSaleProduct();
     await Promise.all(sales.map((sale) => salesModel.add(sale)));

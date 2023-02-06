@@ -8,7 +8,6 @@ const productService = {
       name: Joi.string().required().min(5),
     }),
   ),
-
   async getAll() {
     const items = await productModel.getAll();
     return items;
@@ -33,13 +32,11 @@ const productService = {
     };
     return updatedProduct;
   },
-
   async delete(id) {
     await this.getById(id);
     await productModel.delete(id);
     return true;
   },
-
   async search(query) {
     const item = await productModel.search(query);
     return item;

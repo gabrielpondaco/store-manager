@@ -31,7 +31,6 @@ const productModel = {
     return true;
   },
   async search(query) {
-    console.log(query);
     const likeWord = `%${query}%`;
     const sql = `
     SELECT * FROM products WHERE products.name LIKE ?`;

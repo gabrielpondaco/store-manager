@@ -7,7 +7,6 @@ const salesController = {
     const items = await salesService.getAll();
     return res.status(200).json(items);
   },
-
   async getById(req, res, next) {
     try {
       const item = await salesService.getById(req.params.id);
@@ -16,7 +15,6 @@ const salesController = {
       next(error);
     }
   },
-
   async add(req, res, next) {
     try {
       await Promise.all(
